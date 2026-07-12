@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from enum import StrEnum
+from typing import Self
+
+from ai_knowledge_service.types import DocumentId
 
 
 class DocumentType(StrEnum):
@@ -11,7 +14,7 @@ class DocumentType(StrEnum):
 
 @dataclass(frozen=True, slots=True)
 class Document:
-    document_id: str
+    document_id: DocumentId
     title: str
     source_url: str
     document_type: DocumentType
@@ -20,7 +23,7 @@ class Document:
     @classmethod
     def create(
         cls, *, document_id: str, title: str, source_url: str, document_type: DocumentType
-    ) -> "Document":
+    ) -> Self:
         normalized_id = document_id.strip()
         normalized_title = title.strip()
         normalized_url = source_url.strip()
@@ -33,7 +36,7 @@ class Document:
             raise ValueError("source_url must be an HTTP(S) URL")
 
         return cls(
-            document_id=normalized_id,
+            document_id=DocumentId(normalized_id),
             title=normalized_title,
             source_url=normalized_url,
             document_type=document_type,
