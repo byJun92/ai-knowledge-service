@@ -16,4 +16,5 @@
 uv sync
 uv run pytest
 uv run ruff check .
+uv run ai-knowledge-service
 ```
