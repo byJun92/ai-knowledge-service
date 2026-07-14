@@ -33,3 +33,7 @@ class DocumentNotFoundError(ApplicationError):
 
 class ExternalServiceError(ApplicationError):
     code = "external_service_error"
+
+
+class DocumentAlreadyExistsError(ApplicationError):
+    code = "document_already_exists"
